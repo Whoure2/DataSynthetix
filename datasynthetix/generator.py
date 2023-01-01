@@ -1,0 +1,20 @@
+import numpy as np
+import pandas as pd
+
+class TabularGenerator:
+    """Generates high-fidelity synthetic tabular data with privacy guarantees."""
+    def __init__(self, epsilon=1.0):
+        self.epsilon = epsilon
+
+    def add_laplace_noise(self, data, sensitivity):
+        scale = sensitivity / self.epsilon
+        noise = np.random.laplace(0, scale, data.shape)
+        return data + noise
+
+    def create_synthetic_df(self, n_rows):
+        data = {
+            "age": np.random.randint(18, 80, n_rows),
+            "income": self.add_laplace_noise(np.random.normal(50000, 15000, n_rows), 1000),
+            "score": np.random.uniform(0, 100, n_rows)
+        }
+        return pd.DataFrame(data)
