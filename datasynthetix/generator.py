@@ -18,4 +18,4 @@ class TabularGenerator:
             "score": np.random.uniform(0, 100, n_rows)
         }
         return pd.DataFrame(data)
-\n# Maintenance log 1
+\n# Maintenance log 1\n# Maintenance log 2
